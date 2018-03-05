@@ -71,19 +71,22 @@ new_study_sessions = [
     grade: 6,
     user_id: 1,
     date: '3/4/2018',
-    time: '8:15'
+    time: '8:15',
+    content: "Unit Test 1"
   },
   { subject: 'math',
     grade: 7,
     user_id: 2,
     date: '3/4/2018',
-    time: '8:15'
+    time: '8:30',
+    content: "Unit Test 2"
   },
   { subject: 'english',
     grade: 8,
     user_id: 3,
     date: '3/4/2018',
-    time: '8:15'
+    time: '7:45',
+    content: "Unit Test 3"
   }
 ]
 

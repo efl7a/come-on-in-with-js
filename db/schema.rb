@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305005251) do
+ActiveRecord::Schema.define(version: 20180305183230) do
 
   create_table "attendees", force: :cascade do |t|
     t.integer "study_session_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20180305005251) do
     t.time "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "content", default: "Test Prep"
     t.index ["user_id"], name: "index_study_sessions_on_user_id"
   end
 

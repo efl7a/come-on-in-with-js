@@ -1,0 +1,4 @@
+<%= session.subject %> | <%= link_to session.content, study_session_path(session) %>
+<br><br>
+<%= session.date.strftime("%A, %b %d, %Y") %> at <%= session.time.strftime("%H:%M") %>
+<br><br>

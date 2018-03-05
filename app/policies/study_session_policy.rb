@@ -1,5 +1,5 @@
 class StudySessionPolicy < ApplicationPolicy
-  attr_reader :study_session
+  attr_reader :study_session, :user
 
   def initialize(current_user, study_session)
     @user = current_user
@@ -12,7 +12,11 @@ class StudySessionPolicy < ApplicationPolicy
   def show?
   end
 
-  def create
+  def new?
+    user.admin? || user.teacher?
+  end
+
+  def create?
     user.admin? || user.teacher?
   end
 
