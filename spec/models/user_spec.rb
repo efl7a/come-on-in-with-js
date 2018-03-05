@@ -1,4 +1,4 @@
-rrequire 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before(:each) { @user = User.new(name: "Hermione Granger", email: 'user@example.com', badge_number: 123456789) }
