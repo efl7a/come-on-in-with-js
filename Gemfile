@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise', '~> 4.2'
 gem 'omniauth-google-oauth2', '~> 0.5.3'
+gem 'pundit', '~> 1.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

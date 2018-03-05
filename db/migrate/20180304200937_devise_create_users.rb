@@ -6,8 +6,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       #specific to come-on-in
       t.string :name
       t.integer :badge_number
-      t.boolean :admin, default: false
-      
+      t.integer :current_grade
+      t.integer :role
+
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""

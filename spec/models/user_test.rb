@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
   end
 
   it "has a badge_number" do
-    expect(@user.badge_number).to eq 123456789)
+    expect(@user.badge_number).to eq (123456789)
   end
 
   it "has many study_sessions" do
