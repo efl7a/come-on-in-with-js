@@ -21,7 +21,6 @@ class StudySessionsController < ApplicationController
     @study_session = StudySession.new(study_session_params)
     authorize @study_session
     @study_session.teacher = current_user
-    binding.pry
     if @study_session.save
       redirect_to user_study_sessions_path(user_id: current_user)
     else

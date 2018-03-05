@@ -7,7 +7,13 @@ class StudySession < ApplicationRecord
     "ESL", "Honors ESL", "Math", "Honors Math", "Social Studies", "Science", "French", "Spanish", "Band", "Journalism", "Drama", "Art"
   ]
 
+  validates :grade, presence: true
+  validates :content, presence: true
+  validates :date, presence: true
+  validates :time, presence: true
+
   def self.subjects
     SUBJECTS
   end
+
 end
