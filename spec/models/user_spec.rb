@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  before(:each) { @user = User.new(name: "Hermione Granger", email: 'user@example.com', badge_number: 123456789) }
+  before(:each) { @user = User.create(name: "Hermione Granger", email: 'user@example.com', badge_number: 123456789) }
 
   subject { @user }
 
@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
 
   it "has many study_sessions" do
     @user.study_sessions.create
-    expect(@user.study_sesions).to eq(1)
+    expect(@user.study_sessions.count).to eq(1)
   end
 
   it "has a name" do
