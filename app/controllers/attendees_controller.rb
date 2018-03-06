@@ -2,12 +2,7 @@ class AttendeesController < ApplicationController
   before_action :set_attendee, only: [:destroy]
 
   def index
-    raise params.inspect
-    if params[:search]
-      @attendees = Attendee.search(params[:search])
-    else
-      @attendees = policy_scope(Attendee)
-    end
+    @attendees = policy_scope(Attendee)
   end
 
   def create

@@ -19,8 +19,8 @@ class User < ApplicationRecord
 
   def self.attending_by_date(date)
     students_attending = []
-    StudySession.where(date: date).each do |study_session|
-      students_attending << study_session.students
+    StudySession.by_date(date).each do |study_session|
+      students_attending += study_session.students
     end
     self.where(id: students_attending)
   end

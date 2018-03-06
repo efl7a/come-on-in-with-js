@@ -28,6 +28,10 @@ class StudySession < ApplicationRecord
     self.where(id: sessions_attending)
   end
 
+  def self.by_date(date)
+    StudySession.where(date: date)
+  end
+
   def self.search(search)
     self.where(date: search)
   end

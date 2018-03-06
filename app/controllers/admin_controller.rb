@@ -1,7 +1,13 @@
 class AdminController < ApplicationController
   before_action :authorize_admin
-  def index
 
+  def index
+    if params[:search]
+      @study_sessions = StudySession.by_date(params[:search])
+    end
+  end
+
+  def show
   end
 
   private
