@@ -1,7 +1,11 @@
 class StudySessionsController < ApplicationController
   before_action :set_study_session, only: [:show, :edit, :update, :destroy]
   def index
-    @study_sessions = policy_scope(StudySession)
+    if params[:search]
+      @study_sessions = StudySession.search(params[:search])
+    else
+      @study_sessions = policy_scope(StudySession)
+    end
   end
 
   def show
@@ -31,7 +35,7 @@ class StudySessionsController < ApplicationController
   def update
     authorize @study_session
     if @study_session.update(study_session_params)
-      redirect_touser_study_sessions_path(current_user)
+      redirect_to user_study_sessions_path(current_user)
     else
       flash[:alert] = "Study session did not save."
       render "index"

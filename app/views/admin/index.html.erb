@@ -1,0 +1,12 @@
+<h1> Welcome <%= current_user.name  %> to the Come On In Admin Dashboard</h1>
+
+<%= form_tag study_sessions_path, :method => 'get' do %>
+  <%= date_field_tag :search %>
+  <%= submit_tag "Search Study Sessions"%>
+<% end %>
+<%= form_tag attendees_path, :method => 'get' do %>
+  <%= date_field_tag :search %>
+  <%= submit_tag "All Attending Students"%>
+<% end %>
+<br><br>
+<%= button_to "All Study Sessions",  study_sessions_path, :method => 'get' %>

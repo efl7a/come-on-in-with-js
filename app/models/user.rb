@@ -16,4 +16,12 @@ class User < ApplicationRecord
   def attendance_record(study_session)
     Attendee.find_by(user_id: self.id, study_session_id: study_session.id)
   end
+
+  def self.attending_by_date(date)
+    students_attending = []
+    StudySession.where(date: date).each do |study_session|
+      students_attending << study_session.students
+    end
+    self.where(id: students_attending)
+  end
 end

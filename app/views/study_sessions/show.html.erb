@@ -1,9 +1,6 @@
-<%= render :partial => 'study_session', :locals => {session: @study_session} %>
-<% if @study_session.students.count > 0 %>
-  <% @study_session.students.each do |student| %>
-  <%= student.name %> | <%= student.current_grade %>
-  <% end %>
-<% else %>
-  <p>No students have signed up for this study session.</>
+<%= render :partial => 'study_session', :locals => {study_session: @study_session} %>
+
+<% if current_user.teacher? || current_user.admin? %>
+  <%= render :partial => 'teacher_show', :locals => {study_session: @study_session} %>
 <% end %>
 <br><br>

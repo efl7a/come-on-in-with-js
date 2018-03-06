@@ -2,11 +2,16 @@ class AttendeesController < ApplicationController
   before_action :set_attendee, only: [:destroy]
 
   def index
-    @attendees = policy_scope(Attendee)
+    raise params.inspect
+    if params[:search]
+      @attendees = Attendee.search(params[:search])
+    else
+      @attendees = policy_scope(Attendee)
+    end
   end
 
   def create
-    @attendee = Attendee.new(user_id: current_user.id, study_session_id: params[:session_id])
+    @attendee = Attendee.new(user_id: current_user.id, study_session_id: params[:study_session_id])
     authorize @attendee
     if @attendee.save
       redirect_to user_study_sessions_path(current_user)

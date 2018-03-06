@@ -1,9 +1,11 @@
-<%= session.subject %> | <%= link_to session.content, study_session_path(session) %>
+<%= study_session.subject %> | <%= study_session.teacher.name %> | <%= study_session.grade %>
 <br><br>
-<%= session.date.strftime("%A, %b %d, %Y") %> at <%= session.time.strftime("%H:%M") %>
+<%= link_to study_session.content, study_session_path(study_session) %>
+<br><br>
+<%= study_session.date.strftime("%A, %b %d, %Y") %> at <%= study_session.time.strftime("%H:%M") %>
 <br><br>
 <% if current_user.teacher? || current_user.admin? %>
-  <%= render :partial => "study_sessions/teacher_navigation", :locals => {session: session} %>
+  <%= render :partial => "study_sessions/teacher_navigation", :locals => {study_session: study_session} %>
 <% else %>
-  <%= render :partial => "study_sessions/student_navigation", :locals => {session: session} %>
+  <%= render :partial => "study_sessions/student_navigation", :locals => {study_session: study_session} %>
 <% end %>

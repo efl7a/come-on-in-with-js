@@ -27,4 +27,8 @@ class StudySession < ApplicationRecord
     end
     self.where(id: sessions_attending)
   end
+
+  def self.search(search)
+    self.where(date: search)
+  end
 end

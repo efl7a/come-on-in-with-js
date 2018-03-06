@@ -1,0 +1,7 @@
+<% if study_session.students.count > 0 %>
+  <% study_session.students.each do |student| %>
+  <%= student.name %> | <%= student.current_grade %>
+  <% end %>
+<% else %>
+  <p>No students have signed up for this study session.</>
+<% end %>
