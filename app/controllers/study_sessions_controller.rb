@@ -1,18 +1,7 @@
 class StudySessionsController < ApplicationController
   before_action :set_study_session, only: [:show, :edit, :update, :destroy]
   def index
-    if params[:user_id] && current_user.teacher?
-      @study_sessions = User.find(params[:user_id]).study_sessions
-    elsif params[:user_id] && current_user.student?
-      @study_sessions = StudySession.by_student(current_user)
-    else
-      @study_sessions = StudySession
-    end
-  end
-
-  def by_grade
-    @study_sessions = StudySession.by_grade(current_user.current_grade)
-    render 'index'
+    @study_sessions = policy_scope(StudySession)
   end
 
   def show

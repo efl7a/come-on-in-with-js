@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :study_sessions, only: [:show, :index]
+    resources :attendees, only: [:index, :show]
   end
 
-  get '/users/:user_id/study_sessions_by_grade', to: 'study_sessions#by_grade', as: 'study_sessions_by_grade'
+#  get '/users/:user_id/study_sessions_by_grade', to: 'study_sessions#by_grade', as: 'study_sessions_by_grade'
 end

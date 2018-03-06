@@ -7,8 +7,8 @@
     <%= link_to "Your Study Sessions", user_study_sessions_path(current_user) %><br><br>
     <%= link_to "Create New Study Session", new_study_session_path %><br><br>
   <% else %>
-    <%= link_to "Your Study Sessions", user_study_sessions_path(current_user) %><br><br>
-    <%= link_to "Available Study Sessions", study_sessions_by_grade_path(current_user) %>
+    <%= link_to "Your Study Sessions", user_attendees_path(current_user) %><br><br>
+    <%= link_to "Available Study Sessions", study_sessions_path %>
   <% end %><br><br>
 
 <% else %>

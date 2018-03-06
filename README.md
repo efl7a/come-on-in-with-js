@@ -8,6 +8,11 @@ A wonderful extension of this app would be if the student badges could be added 
 
 For licensing information, please see License.
 
+This is my first rails app.  The following articles helped me utilize certain gems.
+Resources:
+Devise - https://jacopretorius.net/2014/03/adding-custom-fields-to-your-devise-user-model-in-rails-4.html
+Pundit -
+http://vaidehijoshi.github.io/blog/2015/09/29/using-pundit-the-cool-kid-of-authorization/
 
 Things you may want to cover:
 
