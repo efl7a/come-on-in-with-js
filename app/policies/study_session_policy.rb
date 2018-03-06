@@ -1,10 +1,4 @@
 class StudySessionPolicy < ApplicationPolicy
-  attr_reader :study_session, :user
-
-  def initialize(current_user, study_session)
-    @user = current_user
-    @study_session = study_session
-  end
 
   def index?
   end
@@ -25,10 +19,10 @@ class StudySessionPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || study_session.teacher == user
+    user.admin? || record.teacher == user
   end
 
   def destroy?
-    user.admin? || study_session.teacher == user
+    user.admin? || record.teacher == user
   end
 end
