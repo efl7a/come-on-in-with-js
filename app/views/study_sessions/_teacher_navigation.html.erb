@@ -1,0 +1,9 @@
+<% if study_session.students.count > 0 %>
+  <%= render :partial => 'attendees/attendees', :collections => study_session.students, :as => "student"  %>
+<% else %>
+  <p>No students have signed up for this study session.</>
+<% end %>
+<br><br>
+<%= link_to "Edit Study Session", edit_study_session_path(study_session) %>
+<br><br>
+<%= link_to "Delete Study Session", study_session_path(study_session), :method => 'delete' %>

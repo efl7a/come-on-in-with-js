@@ -16,4 +16,8 @@ class StudySession < ApplicationRecord
     SUBJECTS
   end
 
+  def self.by_grade(grade)
+    self.where(grade: grade)
+  end
+
 end

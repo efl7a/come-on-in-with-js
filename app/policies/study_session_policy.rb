@@ -3,7 +3,7 @@ class StudySessionPolicy < ApplicationPolicy
 
   def initialize(current_user, study_session)
     @user = current_user
-    @object = study_session
+    @study_session = study_session
   end
 
   def index?
@@ -20,11 +20,15 @@ class StudySessionPolicy < ApplicationPolicy
     user.admin? || user.teacher?
   end
 
+  def edit?
+    user.admin? || user.teacher?
+  end
+
   def update?
-    user.admin? || study_session.try(:user) == user
+    user.admin? || study_session.teacher == user
   end
 
   def destroy?
-    user.admin? || study_session.try(:user) == user
+    user.admin? || study_session.teacher == user
   end
 end

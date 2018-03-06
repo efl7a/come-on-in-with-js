@@ -1,6 +1,1 @@
 <%= render :partial => 'study_session', :locals => {session: @study_session} %>
-<% if @study_session.students.count > 0 %>
-  <%= render :partial => 'attendees/attendees', :collections => @study_session.students, :as => "student"  %>
-<% else %>
-  <p>No students have signed up for this study session.</>
-<% end %>
