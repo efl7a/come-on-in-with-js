@@ -1,2 +1,6 @@
-#need to add in the Will Not Attend path for study sessions that they have signed up for already
-<%= link_to "Attend", new_attendee_path %>
+<% if current_user.attending?(session) %>
+  <%= button_to "Cannot Attend", attendee_path(current_user.attendance_record(session)), :method => 'delete' %> 
+<% else %>
+  <%= button_to "Attend", attendees_path(session_id: session) %>
+<% end %>
+<br><br>

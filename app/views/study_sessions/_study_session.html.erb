@@ -3,7 +3,7 @@
 <%= session.date.strftime("%A, %b %d, %Y") %> at <%= session.time.strftime("%H:%M") %>
 <br><br>
 <% if current_user.teacher? || current_user.admin? %>
-  <%= render :partial => "teacher_navigation", :locals => {session: @study_session} %>
+  <%= render :partial => "teacher_navigation", :locals => {session: session} %>
 <% else %>
-  <%= render :partial => "student_navigation", :locals => {session: @study_session} %>
+  <%= render :partial => "student_navigation", :locals => {session: session} %>
 <% end %>

@@ -20,4 +20,11 @@ class StudySession < ApplicationRecord
     self.where(grade: grade)
   end
 
+  def self.by_student(student)
+    sessions_attending = []
+    Attendee.where(user_id: student.id).each do |attendee|
+      sessions_attending << attendee.study_session
+    end
+    self.where(id: sessions_attending)
+  end
 end

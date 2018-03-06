@@ -6,6 +6,14 @@ class User < ApplicationRecord
 
   enum role: [:student, :teacher, :admin]
   has_many :study_sessions
-  has_many :attendees, through: :study_sessions
+  has_many :students, through: :study_sessions
+  has_many :attendees
 
+  def attending?(study_session)
+    Attendee.where(user_id: self.id, study_session_id: study_session.id).exists?
+  end
+
+  def attendance_record(study_session)
+    Attendee.find_by(user_id: self.id, study_session_id: study_session.id)
+  end
 end

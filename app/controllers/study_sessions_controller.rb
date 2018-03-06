@@ -1,8 +1,10 @@
 class StudySessionsController < ApplicationController
   before_action :set_study_session, only: [:show, :edit, :update, :destroy]
   def index
-    if params[:user_id]
+    if params[:user_id] && current_user.teacher?
       @study_sessions = User.find(params[:user_id]).study_sessions
+    elsif params[:user_id] && current_user.student?
+      @study_sessions = StudySession.by_student(current_user)
     else
       @study_sessions = StudySession
     end
