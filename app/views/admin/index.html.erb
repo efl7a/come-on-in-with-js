@@ -2,8 +2,9 @@
 
 
 <%= form_tag study_sessions_path, :method => 'get' do %>
-  <%= date_field_tag :search %>
+  <%= text_field_tag :search, "Out of Order"%>
   <%= submit_tag "Search Study Sessions"%>
+    <br><br>
 <% end %>
 <%= form_tag admin_index_path, :method => 'get' do %>
   <%= date_field_tag :search %>
@@ -13,9 +14,5 @@
 <%= button_to "All Study Sessions",  study_sessions_path, :method => 'get' %>
 <br><br>
 <% if @study_sessions %>
-<h2>Students attending on <%= @study_sessions.first.date %></h2>
-<% @study_sessions.each do |study_session| %>
-  <%= study_session.teacher %> | <%= study_session.grade %> | <%= study_session.content %>
-  <br><br>
-  
+<%= render :partial => 'study_sessions/teacher_show', :collection => @study_sessions, :as => 'study_session' %>
 <% end %>

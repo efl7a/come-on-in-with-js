@@ -17,9 +17,8 @@ class StudySessionsController < ApplicationController
   end
 
   def create
-    @study_session = StudySession.new(study_session_params)
+    @study_session = current_user.study_sessions.build(study_session_params)
     authorize @study_session
-    @study_session.teacher = current_user
     if @study_session.save
       redirect_to user_study_sessions_path(current_user)
     else
