@@ -24,6 +24,11 @@ body {
     height: 90%;
 }
 
+html body {
+  background: url("book_background.jpg") no-repeat center top;
+  background-size: cover;
+}
+
 li {
     font-size: 75%;
 }
@@ -57,9 +62,4 @@ footer {
     padding: 25px 0px 0px 0px;
     font-size: 65%;
     color: blue;
-}
-
-.background {
-  background: '/vendor/images/book_background' no-repeat center top;
-  background-size: cover;
 }
