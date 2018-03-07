@@ -9,17 +9,17 @@
   </head>
 
   <body>
-    <%= render "layouts/errors" %>
-    <br><br>
-    <%= render "layouts/navigation" %>
-
-    <%= yield %>
-    <br><br>
-
-
+    <div id="main-container" class="container-fluid">
+      <div class="row">
+        <div id="sidebar" class="col-xs-3">
+          <%= render "layouts/navigation" %>
+        </div>
+        <div id="main-content" class="col-xs-9">
+          <%= render "layouts/errors" %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
-  <footer>
-  <br><br>
-    <%= render "layouts/signout" %> 
-  </footer>
+
 </html>
