@@ -14,4 +14,52 @@
  *= require_self
  */
 
-@import 'bootstrap'
+@import 'bootstrap';
+/* Some Style from the Bootstrap Default Theme */
+
+body {
+    padding-top: 10px;
+    padding-left: 30px;
+    font-size: 24px;
+    height: 90%;
+}
+
+li {
+    font-size: 75%;
+}
+
+nav {
+    font-size: 24px;
+}
+
+nav, main {
+    padding: 10px;
+}
+
+.nav-tabs li {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#flash_error {
+    background-color: red;
+}
+
+#flash_alert {
+    background-color: yellow;
+}
+
+#flash_notice {
+    background-color: lightgreen;
+}
+
+footer {
+    padding: 25px 0px 0px 0px;
+    font-size: 65%;
+    color: blue;
+}
+
+.background {
+  background: '/vendor/images/book_background' no-repeat center top;
+  background-size: cover;
+}

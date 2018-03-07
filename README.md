@@ -13,6 +13,8 @@ Resources:
 Devise - https://jacopretorius.net/2014/03/adding-custom-fields-to-your-devise-user-model-in-rails-4.html
 Pundit -
 http://vaidehijoshi.github.io/blog/2015/09/29/using-pundit-the-cool-kid-of-authorization/
+Bootstrap -
+https://launchschool.com/blog/integrating-rails-and-bootstrap-part-1  (and part-2)
 
 Things you may want to cover:
 

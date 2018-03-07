@@ -1,18 +1,37 @@
-<%= form_for study_session do |f| %>
-  <%= f.label :subject %>
-  <%= f.select :subject, subjects.map {|subject| subject} %>
-  <br><br>
-  <%= f.label :grade %>
-  <%= f.select :grade, [6, 7, 8] %>
-  <br><br>
-  <%= f.label :content, "Purpose of study session:" %>
-  <%= f.text_field :content %>
-  <br><br>
-  <%= f.label :date %>
-  <%= f.date_field :date %>
-  <br><br>
-  <%= f.label :time %>
-  <%= f.text_field :time, :value => study_session.time.strftime('%H:%M') %>
-  <br><br>
-  <%= f.submit "Create Study Session" %>
+<%= form_for study_session, :html => {class: "form"} do |f| %>
+  <div class="field form-group">
+    <%= f.label :subject, :class => "col-xs-3 control-label" %>
+    <div class="col-xs-9">
+      <%= f.select :subject, subjects.map {|subject| subject},:class => "form-control"  %>
+    </div>
+  </div>
+  <div class="field form-group">
+    <%= f.label :grade, :class => "col-xs-3 control-label" %>
+    <div class="col-xs-9">
+      <%= f.select :grade, [6, 7, 8] %>
+    </div>
+  </div>
+  <div class="field form-group">
+    <%= f.label :content, "Purpose of study session:", :class => "col-xs-3 control-label" %>
+    <div class="col-xs-9">
+      <%= f.text_field :content %>
+    </div>
+  </div>
+  <div class="field form-group">
+    <%= f.label :date, :class => "col-xs-3 control-label" %>
+    <div class="col-xs-9">
+      <%= f.date_field :date %>
+    </div>
+  </div>
+  <div class="field form-group">
+    <%= f.label :time, :class => "col-xs-3 control-label" %>
+    <div class="col-xs-9">
+      <%= f.text_field :time, :value => study_session.time.strftime('%H:%M') %>
+    </div>
+  </div>
+  <div class="action form-group">
+    <div clas="col-xs-offset-3 col-xs-9">
+      <%= f.submit "Create Study Session" %>
+    </div>
+  </div>
 <% end %>

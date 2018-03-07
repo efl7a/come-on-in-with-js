@@ -9,15 +9,15 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <%= render "layouts/navigation" %>
+      </div><!-- /.container-fluid -->
+    </nav>
     <div id="main-container" class="container-fluid">
-      <div class="row">
-        <div id="sidebar" class="col-xs-3">
-          <%= render "layouts/navigation" %>
-        </div>
-        <div id="main-content" class="col-xs-9">
-          <%= render "layouts/errors" %>
-          <%= yield %>
-        </div>
+      <div id="main-content" >
+        <%= render "layouts/errors" %>
+        <%= yield %>
       </div>
     </div>
   </body>
