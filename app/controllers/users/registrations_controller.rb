@@ -10,6 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def after_update_path_for(resource)
+    study_sessions_path
+  end
+
   def sign_up_params
     params.require(:user).permit(:name, :current_grade, :role, :email, :password, :password_confirmation)
   end

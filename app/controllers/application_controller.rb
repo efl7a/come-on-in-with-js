@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || study_sessions_path
+    if current_user.provider == 'google_oauth2'
+      edit_user_registration_path
+    else
+      request.env['omniauth.origin'] || study_sessions_path
+    end
   end
 
   private
