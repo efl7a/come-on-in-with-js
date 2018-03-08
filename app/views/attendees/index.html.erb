@@ -1,5 +1,6 @@
-<h1>Hello  <%= current_user.name %> </h1>
-<h2>Here are your study sessions</h2>
+<h2>Hello  <%= current_user.name %> </h2>
+<h3>Here are your study sessions</h3>
+<p class="separators">_______________________________________________</p>
 <% @attendees.each do |attendance_record| %>
   <%= render :partial => 'study_sessions/study_session', :locals => {study_session: attendance_record.study_session} %>
 <% end %>

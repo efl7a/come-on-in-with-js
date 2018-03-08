@@ -15,26 +15,25 @@
  */
 
 @import 'bootstrap';
-/* Some Style from the Bootstrap Default Theme */
 
 body {
     padding-top: 10px;
     padding-left: 30px;
-    font-size: 24px;
+    font-size: 18px;
     height: 90%;
+    padding-bottom: 70px;
 }
 
 html body {
-  background: url("book_background.jpg") no-repeat center top;
-  background-size: cover;
+  background: url("book_background.jpg") center top;
 }
 
-li {
-    font-size: 75%;
+h3 {
+  color: rgb(147, 23, 23);
 }
 
 nav {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 nav, main {
@@ -44,6 +43,15 @@ nav, main {
 .nav-tabs li {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.row {
+  padding: 5px;
+}
+
+.separators {
+  color: white;
+  padding: 0px;
 }
 
 #flash_error {
@@ -59,6 +67,9 @@ nav, main {
 }
 
 footer {
+    height: 100px;
+    bottom: 0;
+    width: 100%;
     padding: 25px 0px 0px 0px;
     font-size: 65%;
     color: blue;

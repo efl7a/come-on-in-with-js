@@ -1,6 +1,6 @@
-<%= render :partial => 'study_session', :locals => {study_session: @study_session} %>
-
 <% if current_user.teacher? || current_user.admin? %>
   <%= render :partial => 'teacher_show', :locals => {study_session: @study_session} %>
+<% else %>
+  <%= render :partial => 'study_session', :locals => {study_session: @study_session} %>
 <% end %>
 <br><br>

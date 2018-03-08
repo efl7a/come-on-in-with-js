@@ -1,10 +1,11 @@
 <h3> <%= study_session.teacher.name %> | <%= study_session.grade %> | <%= study_session.content %> </h3>
-<br><br>
 <% if study_session.students.count > 0 %>
+  <h4>Students Attending</h4>
+  <ul>
   <% study_session.students.each do |student| %>
-  <%= student.name %> | <%= student.current_grade %>
-  <br><br>
+    <li><%= student.name %> | <%= student.current_grade %></li>
   <% end %>
+  </ul>
 <% else %>
-  <p>No students have signed up for this study session.</>
+  <p>No students have signed up for this study session.</><p>
 <% end %>
