@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   before_action :user_signed_in?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  def ater_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || root_path
+  end
 
   private
 

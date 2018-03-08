@@ -10,11 +10,11 @@ class StudySessionPolicy < ApplicationPolicy
 
     def resolve
       if user.admin?
-        scope.all
+        scope.present_or_future
       elsif user.teacher?
-        scope.where(user_id: user.id)
+        scope.present_or_future.where(user_id: user.id)
       else
-        scope.where(grade: user.current_grade)
+        scope.present_or_future.where(grade: user.current_grade)
       end
     end
   end

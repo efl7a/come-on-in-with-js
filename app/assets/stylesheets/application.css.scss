@@ -25,7 +25,13 @@ body {
 }
 
 html body {
-  background: url("book_background.jpg") center top;
+  background: url("book_background.jpg") top center;
+  background-size: cover;
+}
+
+h2 {
+  padding-top: 10px;
+  padding-bottom: 0px;
 }
 
 h3 {

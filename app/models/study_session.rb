@@ -29,10 +29,18 @@ class StudySession < ApplicationRecord
   end
 
   def self.by_date(date)
-    StudySession.where(date: date)
+    self.where(date: date)
   end
 
   def self.search(search)
     self.where(date: search)
+  end
+
+  def self.present_or_future
+    self.ordered_by_date.where("date > ?", Date.today)
+  end
+
+  def self.ordered_by_date
+    self.order(:date)
   end
 end

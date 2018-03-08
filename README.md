@@ -15,6 +15,9 @@ Pundit -
 http://vaidehijoshi.github.io/blog/2015/09/29/using-pundit-the-cool-kid-of-authorization/
 Bootstrap -
 https://launchschool.com/blog/integrating-rails-and-bootstrap-part-1  (and part-2)
+Background Photo -
+https://www.pexels.com/photo/books-school-stacked-closed-48126/
+
 
 Things you may want to cover:
 
