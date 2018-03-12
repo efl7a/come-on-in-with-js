@@ -19,22 +19,14 @@ Background Photo -
 https://www.pexels.com/photo/books-school-stacked-closed-48126/
 
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+Ruby version - 2.3.3
 
-* Configuration
+To get started, fork the repository.
+Run bundle install.
+Migrate and seed the database.
+Create .env file with your GOOGLE_KEY and GOOGLE_SECRET, if you want to allow third party sign in.
+Use rails s to use on your local machine.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Contributions can be made through pull requests.
