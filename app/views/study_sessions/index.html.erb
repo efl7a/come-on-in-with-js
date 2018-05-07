@@ -1,6 +1,8 @@
 <h2>Hello  <%= current_user.name %>! </h2>
 
-<div id="study_session_form"></div>
+<div id="study_session_form">
+<%= render :partial => 'study_sessions/form', :locals => {study_session: @study_session} %>
+</div>
 
 <h3>Here are your study sessions:</h3>
 <p class="separators">_______________________________________________</p>

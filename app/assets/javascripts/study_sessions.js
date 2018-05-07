@@ -1,7 +1,8 @@
 $(document).ready(function () {
-  $("#create").on("click", showForm
+  $('#study_session_form').hide()
+  $("#create").on("click", showForm)
 })
 
 function showForm() {
-  $("#study_session_form").text("Form coming soon!")
+  $("#study_session_form").toggle()
 }
