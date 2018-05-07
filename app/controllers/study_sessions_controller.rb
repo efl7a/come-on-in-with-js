@@ -1,6 +1,7 @@
 class StudySessionsController < ApplicationController
   before_action :set_study_session, only: [:show, :edit, :update, :destroy]
   def index
+    @study_session = StudySession.new
     if params[:search]
       @study_sessions = StudySession.search(params[:search])
     else

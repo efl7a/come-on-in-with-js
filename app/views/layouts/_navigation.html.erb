@@ -16,8 +16,8 @@
   <% if current_user.admin? %>
     <li><%= link_to "Admin Home", admin_index_path %></li>
   <% elsif current_user.teacher? %></li>
-    <li><%= link_to "Your Study Sessions", user_study_sessions_path(current_user)%></li>
-    <li><%= link_to "Create New Study Session", new_study_session_path%></li>
+    <!-- <li><%= link_to "Your Study Sessions", user_study_sessions_path(current_user)%></li> -->
+    <li><%= link_to "Create New Study Session", "#", :id => "create" %></li>
   <% else %>
     <li><%= link_to "Your Study Sessions", user_attendees_path(current_user) %></li>
     <li><%= link_to "Available Study Sessions", study_sessions_path %></li>

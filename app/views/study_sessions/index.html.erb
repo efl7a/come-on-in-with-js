@@ -1,4 +1,7 @@
-<h2>Hello  <%= current_user.name %> </h2>
-<h3>Here are your study sessions</h3>
+<h2>Hello  <%= current_user.name %>! </h2>
+
+<div id="study_session_form"></div>
+
+<h3>Here are your study sessions:</h3>
 <p class="separators">_______________________________________________</p>
 <%= render :collection => @study_sessions, :partial => 'study_sessions/study_session', :as => 'study_session' %>
