@@ -4,7 +4,6 @@ $(document).ready(function () {
   // Why did I have to create a document listener??
   $(document).on("submit", '#new_study_session', function(e){
     e.preventDefault()
-    alert("submitting form")
     submitForm()
   })
   $('.button_to').on("click", showEditForm)
@@ -18,7 +17,9 @@ function submitForm() {
   let values = $("#new_study_session").serialize()
   $.post('/study_sessions', values).done(function(resp) {
     console.log(resp)
-    $("new_session").innerHTML(resp)
+    showForm()
+    $("#new_session").append("<h3>" + resp["subject"] + " | " + resp["teacher"]["name"] + " | " + resp["grade"] + "</h3>")
+    $("#new_session").append("<p>" + resp["content"] + " | " + resp["date"] + " at " + resp["time"] + "</p>")
   })
 }
 

@@ -25,10 +25,8 @@ class StudySessionsController < ApplicationController
     @study_session = current_user.study_sessions.build(study_session_params)
     authorize @study_session
     if @study_session.save
-      render json: @study_session, status:201
-
-
       # redirect_to user_study_sessions_path(current_user)
+      render json: @study_session, status:201
     else
       flash[:alert] = "Study session did not save."
       render "index"
