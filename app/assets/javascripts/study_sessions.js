@@ -16,12 +16,11 @@ function showForm() {
 function submitForm() {
   let values = $("#new_study_session").serialize()
   $.post('/study_sessions', values).done(function(resp) {
-    debugger
     console.log(resp)
     showForm()
     let date = new Date(resp["date"])
     $("#new_session").append("<h3>" + resp["subject"] + " | " + resp["teacher"]["name"] + " | " + resp["grade"] + "</h3>")
-    $("#new_session").append("<p>" + resp["content"] + " | " + date.toDateString() + " at " + resp["time"] + "</p>")
+    $("#new_session").append(`<p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
   })
 }
 

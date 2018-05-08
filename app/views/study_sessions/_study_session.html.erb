@@ -3,8 +3,8 @@
 </div>
 
 <div class="row">
-  <p><%= link_to study_session.content, study_session_path(study_session) %> | 
-  <%= study_session.date.strftime("%A, %b %d, %Y") %> at <%= study_session.time.strftime("%H:%M") %></p>
+  <p><%= link_to study_session.content, study_session_path(study_session) %> |
+  <%= study_session.date.strftime("%A, %b %d, %Y") %> at <%= study_session.time %></p>
 </div>
 
 <% if current_user.teacher? || current_user.admin? %>
