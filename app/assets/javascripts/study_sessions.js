@@ -2,7 +2,7 @@ $(document).ready(function () {
   $("#study_session_form").hide()
   $("#create").on("click", showForm)
   // Why did I have to create a document listener??
-  $(document).on("submit", '#new_study_sessions', function(e){
+  $(document).on("submit", '#new_study_session', function(e){
     e.preventDefault()
     alert("submitting form")
     submitForm()
@@ -15,11 +15,10 @@ function showForm() {
 }
 
 function submitForm() {
-  let values = $(this).serialize()
-  debugger
-  let posting = $.post('/study_sessions', values)
-  posting.done(function(resp) {
-    debugger
+  let values = $("#new_study_session").serialize()
+  $.post('/study_sessions', values).done(function(resp) {
+    console.log(resp)
+    $("new_session").innerHTML(resp)
   })
 }
 
