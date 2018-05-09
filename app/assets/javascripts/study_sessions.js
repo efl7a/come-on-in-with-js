@@ -28,6 +28,7 @@ function submitForm() {
 }
 
 function showEditForm(e) {
+  $("#edit_form_div").empty()
   let id = $(e.currentTarget).children("input").attr("id")
   $.get("/study_sessions/" + id + "/edit").done(function(resp) {
     let date = new Date(resp["date"])
@@ -64,7 +65,7 @@ function submitEdit(e) {
     dataType: "json"
   }).done(function(resp) {
     console.log(resp)
-    showForm()
+    $("#edit_form_div").empty()
     let date = new Date(resp["date"])
     $("#new_session").append("<h3>" + resp["subject"] + " | " + resp["teacher"]["name"] + " | " + resp["grade"] + "</h3>")
     $("#new_session").append(`<p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
