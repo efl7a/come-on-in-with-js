@@ -1,6 +1,6 @@
 <div class="row">
   <!-- <%= button_to "Edit Study Session", edit_study_session_path(study_session), :method => 'get', class: 'btn btn-xs' %> -->
-  <%= button_to "Edit Study Session", "", class: 'btn btn-xs', :id => study_session.id  %>
+  <%= button_to "Edit Study Session", "#", class: 'btn btn-xs', :id => study_session.id  %>
 </div>
 <div class="row">
   <%= button_to "Delete Study Session", study_session_path(study_session), :method => 'delete', :data => {confirm: "Are you sure?"}, class: 'btn btn-danger btn-xs' %>

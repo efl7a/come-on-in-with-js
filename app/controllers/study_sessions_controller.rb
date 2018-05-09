@@ -22,6 +22,7 @@ class StudySessionsController < ApplicationController
   end
 
   def create
+    binding.pry
     @study_session = current_user.study_sessions.build(study_session_params)
     authorize @study_session
     if @study_session.save
@@ -35,10 +36,11 @@ class StudySessionsController < ApplicationController
 
   def edit
     authorize @study_session
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
+    render json: @study_session, status:201
   end
 
   def update
