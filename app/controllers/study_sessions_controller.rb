@@ -44,9 +44,10 @@ class StudySessionsController < ApplicationController
   end
 
   def update
+    binding.pry
     authorize @study_session
     if @study_session.update(study_session_params)
-      redirect_to user_study_sessions_path(current_user)
+      render json: @study_session, status:201
     else
       flash[:alert] = "Study session did not save."
       render "index"
@@ -62,7 +63,7 @@ class StudySessionsController < ApplicationController
   private
   def study_session_params
     params.require(:study_session).permit(:subject, :content, :date, :time, :grade)
-    # params.permit(:subject, :content, :date, :time, :grade)
+    # params.permit(study_session: {})
   end
 
   def set_study_session

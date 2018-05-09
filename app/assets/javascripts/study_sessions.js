@@ -32,12 +32,13 @@ function showEditForm(e) {
   $.get("/study_sessions/" + id + "/edit").done(function(resp) {
     let date = new Date(resp["date"])
     $("#edit_form_div").append(`<div type="hidden" name="study_session['id']" value="${id}"></div>`)
-    $("#edit_form_div").append(`<div class='row'><input type="text_field" name="subject" value="${resp["subject"]}"></input></div>`)
-    $("#edit_form_div").append(`<div class='row'><input type="text_field" name="grade" value="${resp["grade"]}"></input></div>`)
-    $("#edit_form_div").append(`<div class='row'><input type="date_field" name="date" value="${date.toDateString()}"></input></div>`)
-    $("#edit_form_div").append(`<div class='row'><input type="text_field" name="time" value="${resp['time']}"></input></div>`)
+    // $("#edit_form_div").append(`<input type="hidden" name="authenticity_token" value=${$('meta[name=csrf-token]').attr('content')}></input>`)
+    $("#edit_form_div").append(`<div class='row'><input type="text" name="subject" value="${resp["subject"]}"></input></div>`)
+    $("#edit_form_div").append(`<div class='row'><input type="text" name="grade" value="${resp["grade"]}"></input></div>`)
+    $("#edit_form_div").append(`<div class='row'><input type="date" name="date" value="${resp["date"]}"></input></div>`)
+    $("#edit_form_div").append(`<div class='row'><input type="text" name="time" value="${resp['time']}"></input></div>`)
     $("#edit_form_div").append(`<input type="submit" name="commit" value="Edit Study Session" class="btn btn-xs" >`)
-    $("#edit_form_div").on("submit", function(e) {
+    $("form").on("submit", function(e) {
       e.preventDefault()
       submitEdit(e)
     })
@@ -46,8 +47,22 @@ function showEditForm(e) {
 
 function submitEdit(e) {
   let id = $(e.currentTarget).children("div").attr("value")
-  let values = $("#edit_form_div").serialize()
-  $.post(`/study_sessions/${id}`, {_method: "PATCH",  study_session: values}).done(function(resp) {
+  let values = $(e.currentTarget).serialize()
+  // $.post(`/study_sessions/${id}`, {_method: "PATCH", data: {authenticity_token: $('meta[name=csrf-token]').attr('content'), study_session: values}}).
+  $.ajax({
+    type: "PATCH",
+    url: `/study_sessions/${id}`,
+    data: {
+    // authenticity_token: $('meta[name=csrf-token]').attr('content'),
+      study_session: {
+        subject: $("input[name=subject]").val(),
+        grade: $("input[name=grade]").val(),
+        date: $("input[name=date]").val(),
+        time: $("input[name=time]").val()
+      }
+    },
+    dataType: "json"
+  }).done(function(resp) {
     console.log(resp)
     showForm()
     let date = new Date(resp["date"])
