@@ -8,7 +8,13 @@ $(document).ready(function () {
   })
   $('.button_to').on("click", function(e) {
     e.preventDefault()
-    showEditForm(e)
+    let id = $(e.currentTarget).children("input").attr("id")
+    if(id){
+      showEditForm(id)
+    } else {
+      deleteSession(e)
+    }
+
   })
 })
 
@@ -27,9 +33,9 @@ function submitForm() {
   })
 }
 
-function showEditForm(e) {
+function showEditForm(id) {
   $("#edit_form_div").empty()
-  let id = $(e.currentTarget).children("input").attr("id")
+  // let id = $(e.currentTarget).children("input").attr("id")
   $.get("/study_sessions/" + id + "/edit").done(function(resp) {
     let date = new Date(resp["date"])
     $("#edit_form_div").append(`<div type="hidden" name="study_session['id']" value="${id}"></div>`)
@@ -70,4 +76,15 @@ function submitEdit(e) {
     $("#new_session").append("<h3>" + resp["subject"] + " | " + resp["teacher"]["name"] + " | " + resp["grade"] + "</h3>")
     $("#new_session").append(`<p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
   })
+}
+
+function deleteSession(e) {
+  let id = $(e.currentTarget).children("input").eq(1).attr("data-id")
+  $.ajax({
+    type: "DELETE",
+    url: `/study_sessions/${id}`,
+  }).done
+  $("div").filter(function() {
+    return $(this).attr("data-id") == parseInt(id)
+  }).remove()
 }

@@ -22,7 +22,6 @@ class StudySessionsController < ApplicationController
   end
 
   def create
-    binding.pry
     @study_session = current_user.study_sessions.build(study_session_params)
     authorize @study_session
     if @study_session.save
@@ -44,7 +43,6 @@ class StudySessionsController < ApplicationController
   end
 
   def update
-    binding.pry
     authorize @study_session
     if @study_session.update(study_session_params)
       render json: @study_session, status:201
@@ -57,7 +55,7 @@ class StudySessionsController < ApplicationController
   def destroy
     authorize @study_session
     @study_session.destroy
-    redirect_to user_study_sessions_path(current_user)
+    # redirect_to user_study_sessions_path(current_user)
   end
 
   private
