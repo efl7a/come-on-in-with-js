@@ -10,7 +10,7 @@ $(document).ready(function () {
     e.preventDefault()
     let id = $(e.currentTarget).children("input").attr("id")
     if(id){
-      showEditForm(id)
+      showEditForm(e, id)
     } else {
       deleteSession(e)
     }
@@ -27,27 +27,39 @@ function submitForm() {
   $.post('/study_sessions', values).done(function(resp) {
     console.log(resp)
     showForm()
-    let date = new Date(resp["date"])
+    let date = new Date(`${resp["date"]} EST`)
     $("#new_session").append("<h3>" + resp["subject"] + " | " + resp["teacher"]["name"] + " | " + resp["grade"] + "</h3>")
     $("#new_session").append(`<p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
   })
 }
 
-function showEditForm(id) {
-  $("#edit_form_div").empty()
-  // let id = $(e.currentTarget).children("input").attr("id")
+function showEditForm(e, id) {
   $.get("/study_sessions/" + id + "/edit").done(function(resp) {
+
     let date = new Date(resp["date"])
-    $("#edit_form_div").append(`<div type="hidden" name="study_session['id']" value="${id}"></div>`)
-    // $("#edit_form_div").append(`<input type="hidden" name="authenticity_token" value=${$('meta[name=csrf-token]').attr('content')}></input>`)
-    $("#edit_form_div").append(`<div class='row'><input type="text" name="subject" value="${resp["subject"]}"></input></div>`)
-    $("#edit_form_div").append(`<div class='row'><input type="text" name="grade" value="${resp["grade"]}"></input></div>`)
-    $("#edit_form_div").append(`<div class='row'><input type="date" name="date" value="${resp["date"]}"></input></div>`)
-    $("#edit_form_div").append(`<div class='row'><input type="text" name="time" value="${resp['time']}"></input></div>`)
-    $("#edit_form_div").append(`<input type="submit" name="commit" value="Edit Study Session" class="btn btn-xs" >`)
-    $("form").on("submit", function(e) {
+    $(e.currentTarget).parent().parent().append("<form id='edit_form'></form>")
+
+    $(`#${id}`).parent().hide()
+    $("#edit_form").parent().append("<div class='row'><button id='clear' class='btn btn-xs'>No Changes</button></div>")
+    $("#clear").on("click", function() {
+      $("#edit_form").empty()
+      $("#clear").remove()
+      $(`#${id}`).parent().show()
+    })
+
+    $("#edit_form").append(`<div type="hidden" name="study_session['id']" value="${id}"></div>`)
+
+    $("#edit_form").append(`<div class='row'><input type="text" name="subject" value="${resp["subject"]}"></input></div>`)
+    $("#edit_form").append(`<div class='row'><input type="text" name="grade" value="${resp["grade"]}"></input></div>`)
+    $("#edit_form").append(`<div class='row'><input type="date" name="date" value="${resp["date"]}"></input></div>`)
+    $("#edit_form").append(`<div class='row'><input type="text" name="time" value="${resp['time']}"></input></div>`)
+    $("#edit_form").append(`<input type="submit" name="commit" value="Edit Study Session" class="btn btn-xs" >`)
+    $("#edit_form").on("submit", function(e) {
       e.preventDefault()
       submitEdit(e)
+      $("#edit_form").remove()
+      $("#clear").remove()
+      $(`#${id}`).parent().show()
     })
   })
 }
@@ -70,13 +82,14 @@ function submitEdit(e) {
     },
     dataType: "json"
   }).done(function(resp) {
-    $("div").filter(function() {
+    let r = $("div").filter(function() {
       return $(this).attr("data-id") == parseInt(id)
-    }).remove()
-    $("#edit_form_div").empty()
-    let date = new Date(resp["date"])
-    $("#new_session").append("<h3>" + resp["subject"] + " | " + resp["teacher"]["name"] + " | " + resp["grade"] + "</h3>")
-    $("#new_session").append(`<p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
+    })
+    let date = new Date(`${resp["date"]} EST`)
+    r.children("div").eq(0).empty()
+    r.children("div").eq(0).append("<h3>" + resp["subject"] + " | " + resp["teacher"]["name"] + " | " + resp["grade"] + `</h3>
+    <p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
+
   })
 }
 
