@@ -5,9 +5,9 @@
     <%= study_session.date.strftime("%A, %b %d, %Y") %> at <%= study_session.time %></p>
   </div>
   <div class="col">
-    <form data-id="<%= study_session.id %>">
+    <!-- <form data-id="<%= study_session.id %>">
 
-    </form>
+    </form> -->
     <% if current_user.teacher? || current_user.admin? %>
       <%= render :partial => "study_sessions/teacher_navigation", :locals => {study_session: study_session} %>
     <% else %>
