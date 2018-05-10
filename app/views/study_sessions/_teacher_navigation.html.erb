@@ -1,8 +1,8 @@
 <div class="row" >
   <!-- <%= button_to "Edit Study Session", edit_study_session_path(study_session), :method => 'get', class: 'btn btn-xs' %> -->
-  <%= button_to "Edit Study Session", "#", class: 'btn btn-xs', :id => study_session.id  %>
+  <%= button_to "Edit Study Session", "#", form_class: 'teacher', class: 'btn btn-xs', :id => study_session.id  %>
 </div>
 <div class="row">
 <!-- if multiple popups continue, may have to change javascript_include_tag to read data-turbolinks-eval => false -->
-  <%= button_to "Delete Study Session", "#", :method => 'delete', :data => {confirm: "Are you sure?", id: study_session.id}, class: 'btn btn-danger btn-xs' %>
+  <%= button_to "Delete Study Session", "#", :method => 'delete', :data => {confirm: "Are you sure?", id: study_session.id}, form_class: "teacher", class: 'btn btn-danger btn-xs' %>
 </div>

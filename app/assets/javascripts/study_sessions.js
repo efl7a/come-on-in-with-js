@@ -6,7 +6,7 @@ $(document).ready(function () {
     e.preventDefault()
     submitForm()
   })
-  $('.button_to').on("click", function(e) {
+  $('.teacher').on("click", function(e) {
     e.preventDefault()
     let id = $(e.currentTarget).children("input").attr("id")
     if(id){

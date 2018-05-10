@@ -19,4 +19,5 @@
 //= require bootstrap-sprockets
 
 //= require study_sessions
+//= require study_sessions_student
 //= require cable

@@ -1,5 +1,5 @@
 <% if current_user.attending?(study_session) %>
-  <%= button_to "Cannot Attend", attendee_path(current_user.attendance_record(study_session)), :method => 'delete' %>
+  <%= button_to "Cannot Attend", attendee_path(current_user.attendance_record(study_session)), :method => 'delete', form_class: "student", class: 'btn btn-xs student' %>
 <% else %>
-  <%= button_to "Attend", attendees_path(study_session_id: study_session) %>
+  <%= button_to "Attend", "",  form_class: "student", class: 'btn btn-xs' %>
 <% end %>
