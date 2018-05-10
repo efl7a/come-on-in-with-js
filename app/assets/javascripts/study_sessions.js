@@ -70,7 +70,9 @@ function submitEdit(e) {
     },
     dataType: "json"
   }).done(function(resp) {
-    console.log(resp)
+    $("div").filter(function() {
+      return $(this).attr("data-id") == parseInt(id)
+    }).remove()
     $("#edit_form_div").empty()
     let date = new Date(resp["date"])
     $("#new_session").append("<h3>" + resp["subject"] + " | " + resp["teacher"]["name"] + " | " + resp["grade"] + "</h3>")
