@@ -17,9 +17,12 @@ class AttendeesController < ApplicationController
   end
 
   def destroy
+    binding.pry
+    @attendee = Attendee.find(user_id: current_user.id, study_session_id: params[:study_session_id])
     authorize @attendee
     if @attendee.destroy
-      redirect_to user_study_sessions_path(current_user)
+      # redirect_to user_study_sessions_path(current_user)
+      render json: "deleted"
     else
       flash[:alert] = "Could not delete this attendance record."
       render '/welcome/index'

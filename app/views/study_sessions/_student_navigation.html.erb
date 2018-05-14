@@ -1,5 +1,5 @@
 <% if current_user.attending?(study_session) %>
   <%= button_to "Attending - Change Attendance", "", form_class: "student", class: 'btn btn-xs student' %>
 <% else %>
-  <%= button_to "Attend", "#",  form_class: "student", class: 'btn btn-xs' %>
+  <%= button_to "Attend", "",  form_class: "student", class: 'btn btn-xs' %>
 <% end %>
