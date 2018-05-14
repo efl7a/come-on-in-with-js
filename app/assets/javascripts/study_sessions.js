@@ -1,6 +1,9 @@
 $(document).ready(function () {
   $("#study_session_form").hide()
   $("#create").on("click", showForm)
+  $(".content").on("click", function(e) {
+    showAttendees(e)
+  })
   // Why did I have to create a document listener??
   $(document).on("submit", '#new_study_session', function(e){
     e.preventDefault()
@@ -102,4 +105,14 @@ function deleteSession(e) {
   $("div").filter(function() {
     return $(this).attr("data-id") == parseInt(id)
   }).remove()
+}
+
+function showAttendees(e) {
+  let id = $(e.currentTarget).data("id")
+  let show = $.get(`/study_sessions/${id}`)
+  show.done(function(resp) {
+  let students = resp["students"]
+  debugger
+}.bind(e))
+
 }

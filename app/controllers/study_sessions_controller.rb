@@ -10,6 +10,7 @@ class StudySessionsController < ApplicationController
   end
 
   def show
+    render json: @study_session
   end
 
   def new

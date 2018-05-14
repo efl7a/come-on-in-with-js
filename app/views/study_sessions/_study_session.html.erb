@@ -1,7 +1,7 @@
 <div class="row" data-id="<%= study_session.id %>">
   <div class="col">
     <h3><%= study_session.subject %> | <%= study_session.teacher.name %> | <%= study_session.grade %></h3>
-    <p><%= link_to study_session.content, study_session_path(study_session) %> |
+    <p><%= link_to study_session.content, "", class: "content", data: {id: study_session.id} %> |
     <%= study_session.date.strftime("%A, %b %d, %Y") %> at <%= study_session.time %></p>
   </div>
   <div class="col">
