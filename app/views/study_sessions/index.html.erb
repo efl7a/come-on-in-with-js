@@ -1,8 +1,9 @@
 <h2>Hello  <%= current_user.name %>! </h2>
-
-<div id="study_session_form">
-  <%= render :partial => 'form', :locals => {study_session: @study_session} %>
-</div>
+<% if current_user.teacher? || current_user.admin? %>
+  <div id="study_session_form">
+    <%= render :partial => 'form', :locals => {study_session: @study_session} %>
+  </div>
+<% end %>
 
 <h3>Here are your study sessions:</h3>
 <p class="separators">_______________________________________________</p>

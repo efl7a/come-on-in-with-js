@@ -6,31 +6,36 @@ $(document).ready(function () {
     if(form.children("input").attr("value") === "Attend"){
       attendSession(form, id)
     } else {
-      changeAttendance(form, id)
+      let attendeeId = form.children("input").attr("data-attendee-id")
+      changeAttendance(form, attendeeId)
     }
   })
 })
 
 function attendSession(form, id) {
-  $.ajax({
+  let posting = $.ajax({
     type: "POST",
-    url: `/attendees/${id}`,
-
-    dataType: "json"
-  }).done(function(resp) {
-    $(this).children("input").attr("value", "Attending - Change Attendance")
-  })
-}
-
-function changeAttendance(form, id){
-  $.ajax({
-    type: "DELETE",
     url: `/attendees`,
     data: {
       study_session_id: id
     },
     dataType: "json"
-  }).done(function(resp) {
-    $(this).children("input").attr("value", "Attend")
   })
+  posting.done(function(resp) {
+    $(this).children("input").attr({
+      "value": "Attending - Change Attendance",
+      "data-attendee-id": resp["id"]
+    })
+  }.bind(form))
+}
+
+function changeAttendance(form, attendeeId){
+  let deleting = $.ajax({
+    type: "DELETE",
+    url: `/attendees/${attendeeId}`,
+    dataType: "json"
+  })
+  deleting.done(function(resp) {
+    $(this).children("input").attr({"value": "Attend", "data-attendee-id": ""})
+  }.bind(form))
 }
