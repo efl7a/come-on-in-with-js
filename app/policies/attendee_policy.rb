@@ -3,6 +3,7 @@ class AttendeePolicy < ApplicationPolicy
     attr_reader :user, :scope
 
     def initialize(user, scope)
+      raise Pundit::NotAuthorizedError unless user
       @user = user
       @scope = scope
     end

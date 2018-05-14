@@ -1,14 +1,13 @@
 $(document).ready(function () {
   $('.student').on("submit", function(e) {
     e.preventDefault()
-    alert("I got the button")
+    // May need to distinguish here if the button is "attend" or "attending"
     attendSession(e)
   })
 })
 
 function attendSession(e) {
   let id = $(e.currentTarget).parent().parent().data('id')
-  debugger
   $.ajax({
     type: "POST",
     url: `/attendees`,
@@ -18,5 +17,7 @@ function attendSession(e) {
     dataType: "json"
   }).done(function(resp) {
     // Need to switch attendance button
+    debugger
+
   })
 }

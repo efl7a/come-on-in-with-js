@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include Pundit
+  # below before_action stopped firing.  Do not understand why.
   before_action :user_signed_in?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

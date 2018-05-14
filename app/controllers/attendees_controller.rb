@@ -6,7 +6,6 @@ class AttendeesController < ApplicationController
   end
 
   def create
-    binding.pry
     @attendee = Attendee.find_or_initialize_by(user_id: current_user.id, study_session_id: params[:study_session_id])
     authorize @attendee
     if @attendee.save
