@@ -2,6 +2,7 @@ $(document).ready(function () {
   $("#study_session_form").hide()
   $("#create").on("click", showForm)
   $(".content").on("click", function(e) {
+    e.preventDefault()
     showAttendees(e)
   })
   // Why did I have to create a document listener??
@@ -111,8 +112,16 @@ function showAttendees(e) {
   let id = $(e.currentTarget).data("id")
   let show = $.get(`/study_sessions/${id}`)
   show.done(function(resp) {
-  let students = resp["students"]
-  debugger
+    let students = resp["students"]
+    if(students.length === 0){
+      $(this.currentTarget).parent().append(`<p>No students registered</p>`)
+    } else{
+      $(this.currentTarget).parent().append(`<ul class='${id}'></ul>`)
+      let list = $(`ul.${id}`)
+      students.forEach(function(student){
+        list.append(`<li>${student["name"]}</li>`)
+    })
+    }
 }.bind(e))
 
 }
