@@ -16,10 +16,7 @@ class StudySessionsController < ApplicationController
   def new
     @study_session = StudySession.new
     authorize @study_session
-    respond_to do |format|
-      format.html
-      format.js {render partial: "study_sessions/form", layout: false}
-    end
+    render layout: false
   end
 
   def create
@@ -40,7 +37,8 @@ class StudySessionsController < ApplicationController
     #   format.html
     #   format.js
     # end
-    render json: @study_session, status:201
+    # render json: @study_session, status:201
+    render layout: false
   end
 
   def update
