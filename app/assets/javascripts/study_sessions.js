@@ -1,6 +1,8 @@
 $(document).ready(function () {
-  $("#study_session_form").hide()
-  $("#create").on("click", showForm)
+  $("#create").on("click", function(e) {
+    e.preventDefault()
+    showForm()
+  })
   $(".content").on("click", function(e) {
     e.preventDefault()
     showAttendees(e)
@@ -23,7 +25,41 @@ $(document).ready(function () {
 })
 
 function showForm() {
-  $("#study_session_form").toggle()
+  $.get("/study_sessions/new").done(function(resp) {
+     $("#study_session_form").append(resp)
+  })
+  //   $("#study_session_form").append("<form id='new_study_session'></form>")
+  //   $("#new_study_session").append(`<div class='row'>
+  //     Subject: <select name="subject" id="study_session_subject"><option value="ESL">ESL</option>
+  //     <option value="Quidditch">Quidditch</option>
+  //     <option value="Honors ESL">Honors ESL</option>
+  //     <option value="Math">Math</option>
+  //     <option value="Honors Math">Honors Math</option>
+  //     <option value="Social Studies">Social Studies</option>
+  //     <option value="Science">Science</option>
+  //     <option value="French">French</option>
+  //     <option value="Spanish">Spanish</option>
+  //     <option value="Band">Band</option>
+  //     <option value="Journalism">Journalism</option>
+  //     <option value="Drama">Drama</option>
+  //     <option value="Art">Art</option></select>
+  //     </div>`)
+  //   $("#new_study_session").append(`<div class='row'>Grade: <select name="grade" id="study_session_grade">
+  //     <option value="6">6</option>
+  //     <option value="7">7</option>
+  //     <option value="8">8</option>
+  //     </select>
+  //     </div>`)
+  //   $("#new_study_session").append(`<div class='row'>Date: <input type="date" name="date"></input></div>`)
+  //   $("#new_study_session").append(`<div class='row'>Content: <input type="text" name="time"></input></div>`)
+  //   $("#new_study_session").append(`<input type="submit" name="commit" value="Create Study Session" class="btn btn-xs" >`)
+  //   $("#new_study_session").on("submit", function(e) {
+  //     e.preventDefault()
+  //     submitNew(e)
+  //     $("#edit_form").remove()
+  //     $("#clear").remove()
+  //     $(`#${id}`).parent().show()
+  // })
 }
 
 function submitForm() {

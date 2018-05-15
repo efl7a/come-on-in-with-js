@@ -4,7 +4,7 @@ class StudySession < ApplicationRecord
   has_many :students, through: :attendees, foreign_key: :user_id
 
   SUBJECTS = [
-    "ESL", "Quidditch", "Honors ESL", "Math", "Honors Math", "Social Studies", "Science", "French", "Spanish", "Band", "Journalism", "Drama", "Art"
+    "ELA", "Quidditch", "Honors ELA", "Math", "Honors Math", "Social Studies", "Science", "French", "Spanish", "Band", "Journalism", "Drama", "Art"
   ]
 
   validates :grade, presence: true

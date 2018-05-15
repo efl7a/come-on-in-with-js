@@ -18,7 +18,7 @@ class StudySessionsController < ApplicationController
     authorize @study_session
     respond_to do |format|
       format.html
-      format.js
+      format.js {render partial: "study_sessions/form", layout: false}
     end
   end
 
