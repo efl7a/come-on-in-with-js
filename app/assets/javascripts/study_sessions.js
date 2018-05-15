@@ -143,15 +143,17 @@ function showAttendees(e, id) {
         list.append(`<li>${student["name"]}</li>`)
       })
     }
-    $(e.currentTarget).attr("class", "hide-attendees")
-    $(e.currentTarget).children("input").attr("value", "Hide Attendees")
-    $(".hide-attendees").on("click", function(e) {
-      e.preventDefault()
-      this.find(".attendees").empty()
-      debugger
-      $(e.currentTarget).attr("class", "show-attendees")
-      $(e.currentTarget).children("input").attr("value", "Show Attendees")
-    }.bind(row))
+    $(e.currentTarget).hide()
+    // Currently this is not working, so I am commenting it out.
+    // $(e.currentTarget).attr("class", "hide-attendees")
+    // $(e.currentTarget).children("input").attr("value", "Hide Attendees")
+    // $(".hide-attendees").on("click", function(e) {
+    //   e.preventDefault()
+    //   this.find(".attendees").empty()
+    //   debugger
+    //   $(e.currentTarget).attr("class", "show-attendees")
+    //   $(e.currentTarget).children("input").attr("value", "Show Attendees")
+    // }.bind(row))
 }.bind(e))
 
 }
