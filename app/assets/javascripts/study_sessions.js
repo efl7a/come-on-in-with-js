@@ -3,15 +3,12 @@ $(document).ready(function () {
     e.preventDefault()
     showForm()
   })
+
   $(".content").on("click", function(e) {
     e.preventDefault()
     showAttendees(e)
   })
-  // Why did I have to create a document listener??
-  $(document).on("submit", '#new_study_session', function(e){
-    e.preventDefault()
-    submitForm()
-  })
+
   $('.teacher').on("click", function(e) {
     e.preventDefault()
     let id = $(e.currentTarget).children("input").attr("id")
@@ -20,56 +17,40 @@ $(document).ready(function () {
     } else {
       deleteSession(e)
     }
-
   })
 })
 
 function showForm() {
   $.get("/study_sessions/new").done(function(resp) {
      $("#study_session_form").append(resp)
+     $("#study_session_form").append('<button id="remove_study_session_form" class="btn btn-danger btn-xs">Cancel</button>')
+     $("#remove_study_session_form").on("click", function(e){
+       e.preventDefault()
+       $("#study_session_form").empty()
+     })
+     $("#new_study_session").on("submit", function(e) {
+       e.preventDefault()
+       submitForm()
+     })
   })
-  //   $("#study_session_form").append("<form id='new_study_session'></form>")
-  //   $("#new_study_session").append(`<div class='row'>
-  //     Subject: <select name="subject" id="study_session_subject"><option value="ESL">ESL</option>
-  //     <option value="Quidditch">Quidditch</option>
-  //     <option value="Honors ESL">Honors ESL</option>
-  //     <option value="Math">Math</option>
-  //     <option value="Honors Math">Honors Math</option>
-  //     <option value="Social Studies">Social Studies</option>
-  //     <option value="Science">Science</option>
-  //     <option value="French">French</option>
-  //     <option value="Spanish">Spanish</option>
-  //     <option value="Band">Band</option>
-  //     <option value="Journalism">Journalism</option>
-  //     <option value="Drama">Drama</option>
-  //     <option value="Art">Art</option></select>
-  //     </div>`)
-  //   $("#new_study_session").append(`<div class='row'>Grade: <select name="grade" id="study_session_grade">
-  //     <option value="6">6</option>
-  //     <option value="7">7</option>
-  //     <option value="8">8</option>
-  //     </select>
-  //     </div>`)
-  //   $("#new_study_session").append(`<div class='row'>Date: <input type="date" name="date"></input></div>`)
-  //   $("#new_study_session").append(`<div class='row'>Content: <input type="text" name="time"></input></div>`)
-  //   $("#new_study_session").append(`<input type="submit" name="commit" value="Create Study Session" class="btn btn-xs" >`)
-  //   $("#new_study_session").on("submit", function(e) {
-  //     e.preventDefault()
-  //     submitNew(e)
-  //     $("#edit_form").remove()
-  //     $("#clear").remove()
-  //     $(`#${id}`).parent().show()
-  // })
 }
 
 function submitForm() {
   let values = $("#new_study_session").serialize()
   $.post('/study_sessions', values).done(function(resp) {
-    console.log(resp)
-    showForm()
+    $("#study_session_form").empty()
     let date = new Date(`${resp["date"]} EST`)
-    $("#new_session").append("<h3>" + resp["subject"] + " | " + resp["teacher"]["name"] + " | " + resp["grade"] + "</h3>")
-    $("#new_session").append(`<p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
+    $("#new_session").append(`<div class='row' data-id='${resp["id"]}'></div>`)
+    let row = $("#new_session").children(".row").filter(function(row) {
+      return $(this).data("id") === resp["id"]
+    })
+    debugger
+    row.append("<div class='col'></div>")
+    row.children(".col").append(`<h3> ${resp["subject"]} | ${resp["teacher"]["name"]} | ${resp["grade"]}</h3>`)
+    row.children(".col").append(`<p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
+    row.append("<div class='col'></div>")
+    row.children(".col").eq(1).append(`<button id="${resp['id']}" class="btn btn-xs">Edit Study Session</button><br>`)
+    row.children(".col").eq(1).append(`<p><button data-id="${resp['id']}" class="btn btn-danger btn-xs">Delete Study Session</button></p>`)
   })
 }
 
