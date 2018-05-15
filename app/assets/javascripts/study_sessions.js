@@ -44,19 +44,30 @@ function submitForm() {
     let row = $("#new_session").children(".row").filter(function(row) {
       return $(this).data("id") === resp["id"]
     })
-    debugger
+
     row.append("<div class='col'></div>")
     row.children(".col").append(`<h3> ${resp["subject"]} | ${resp["teacher"]["name"]} | ${resp["grade"]}</h3>`)
     row.children(".col").append(`<p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
     row.append("<div class='col'></div>")
-    row.children(".col").eq(1).append(`<button id="${resp['id']}" class="btn btn-xs">Edit Study Session</button><br>`)
-    row.children(".col").eq(1).append(`<p><button data-id="${resp['id']}" class="btn btn-danger btn-xs">Delete Study Session</button></p>`)
+    row.children(".col").eq(1).append(`<p><button id="${resp['id']}" class="teacher-js btn btn-xs">Edit Study Session</button></p>`)
+    row.children(".col").eq(1).append(`<p><button data-id="${resp['id']}" class="teacher-js btn btn-danger btn-xs">Delete Study Session</button></p>`)
+
+    $("button.teacher-js").on("click", function(e) {
+      e.preventDefault()
+      let id = $(e.currentTarget).attr("id")
+      debugger
+      if(id){
+        showEditForm(e, id)
+      } else {
+        deleteSession(e)
+      }
+    })
   })
 }
 
 function showEditForm(e, id) {
   $.get("/study_sessions/" + id + "/edit").done(function(resp) {
-
+    
     let date = new Date(resp["date"])
     $(e.currentTarget).parent().parent().append("<form id='edit_form'></form>")
 
