@@ -67,29 +67,21 @@ function submitForm() {
 
 function showEditForm(e, id) {
   $.get("/study_sessions/" + id + "/edit").done(function(resp) {
-    
-    let date = new Date(resp["date"])
-    $(e.currentTarget).parent().parent().append("<form id='edit_form'></form>")
+
+    $(e.currentTarget).parent().parent().append(resp)
 
     $(`#${id}`).parent().hide()
-    $("#edit_form").parent().append("<div class='row'><button id='clear' class='btn btn-xs'>No Changes</button></div>")
-    $("#clear").on("click", function() {
-      $("#edit_form").empty()
-      $("#clear").remove()
-      $(`#${id}`).parent().show()
-    })
 
-    $("#edit_form").append(`<div type="hidden" name="study_session['id']" value="${id}"></div>`)
-
-    $("#edit_form").append(`<div class='row'><input type="text" name="subject" value="${resp["subject"]}"></input></div>`)
-    $("#edit_form").append(`<div class='row'><input type="text" name="grade" value="${resp["grade"]}"></input></div>`)
-    $("#edit_form").append(`<div class='row'><input type="date" name="date" value="${resp["date"]}"></input></div>`)
-    $("#edit_form").append(`<div class='row'><input type="text" name="time" value="${resp['time']}"></input></div>`)
-    $("#edit_form").append(`<input type="submit" name="commit" value="Edit Study Session" class="btn btn-xs" >`)
-    $("#edit_form").on("submit", function(e) {
+    $(`#edit_study_session_${id}`).attr("action", "")
+    $(`#edit_study_session_${id}`).attr("data-id", id)
+    $(`#edit_study_session_${id}`).on("submit", function(e) {
       e.preventDefault()
       submitEdit(e)
-      $("#edit_form").remove()
+    })
+
+    $(`#edit_study_session_${id}`).parent().append("<div class='row'><button id='clear' class='btn btn-xs'>No Changes</button></div>")
+    $("#clear").on("click", function() {
+      $(`#edit_study_session_${id}`).remove()
       $("#clear").remove()
       $(`#${id}`).parent().show()
     })
@@ -97,25 +89,22 @@ function showEditForm(e, id) {
 }
 
 function submitEdit(e) {
-  let id = $(e.currentTarget).children("div").attr("value")
+  let id = $(e.currentTarget).attr("data-id")
   let values = $(e.currentTarget).serialize()
   // $.post(`/study_sessions/${id}`, {_method: "PATCH", data: {authenticity_token: $('meta[name=csrf-token]').attr('content'), study_session: values}}).
   $.ajax({
     type: "PATCH",
     url: `/study_sessions/${id}`,
-    data: {
-    // authenticity_token: $('meta[name=csrf-token]').attr('content'),
-      study_session: {
-        subject: $("input[name=subject]").val(),
-        grade: $("input[name=grade]").val(),
-        date: $("input[name=date]").val(),
-        time: $("input[name=time]").val()
-      }
-    },
+    data: values,
     dataType: "json"
   }).done(function(resp) {
+
+    $(`#edit_study_session_${id}`).remove()
+    $("#clear").remove()
+    $(`#${id}`).parent().show()
+
     let r = $("div").filter(function() {
-      return $(this).attr("data-id") == parseInt(id)
+      return $(this).attr("data-id") == parseInt(resp["id"])
     })
     let date = new Date(`${resp["date"]} EST`)
     r.children("div").eq(0).empty()
