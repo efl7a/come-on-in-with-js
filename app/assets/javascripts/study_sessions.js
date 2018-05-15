@@ -4,11 +4,6 @@ $(document).ready(function () {
     showForm()
   })
 
-  $(".content").on("click", function(e) {
-    e.preventDefault()
-    showAttendees(e)
-  })
-
   $('.teacher').on("click", function(e) {
     e.preventDefault()
     let id = $(e.currentTarget).children("input").attr("id")
@@ -18,6 +13,12 @@ $(document).ready(function () {
       let id = $(e.currentTarget).children("input").eq(1).attr("data-id")
       deleteSession(id)
     }
+  })
+
+  $('.show-attendees').on("click", function(e) {
+    e.preventDefault()
+    let id = $(e.currentTarget).children("input").attr("data-id")
+    showAttendees(e, id)
   })
 })
 
@@ -126,20 +127,31 @@ function deleteSession(id) {
   }).remove()
 }
 
-function showAttendees(e) {
-  let id = $(e.currentTarget).data("id")
+function showAttendees(e, id) {
   let show = $.get(`/study_sessions/${id}`)
   show.done(function(resp) {
     let students = resp["students"]
+    let row = $("div.row").filter(function(){
+      return $(this).data("id") == id
+    })
     if(students.length === 0){
-      $(this.currentTarget).parent().append(`<p>No students registered</p>`)
-    } else{
-      $(this.currentTarget).parent().append(`<ul class='${id}'></ul>`)
+      row.find(".attendees").append(`<p>No students registered</p>`)
+    } else {
+      row.find(".attendees").append(`<ul class='${id}'></ul>`)
       let list = $(`ul.${id}`)
       students.forEach(function(student){
         list.append(`<li>${student["name"]}</li>`)
-    })
+      })
     }
+    $(e.currentTarget).attr("class", "hide-attendees")
+    $(e.currentTarget).children("input").attr("value", "Hide Attendees")
+    $(".hide-attendees").on("click", function(e) {
+      e.preventDefault()
+      this.find(".attendees").empty()
+      debugger
+      $(e.currentTarget).attr("class", "show-attendees")
+      $(e.currentTarget).children("input").attr("value", "Show Attendees")
+    }.bind(row))
 }.bind(e))
 
 }

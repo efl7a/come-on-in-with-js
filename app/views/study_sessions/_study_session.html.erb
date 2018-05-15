@@ -1,8 +1,9 @@
 <div class="row" data-id="<%= study_session.id %>">
   <div class="col">
     <h3><%= study_session.subject %> | <%= study_session.teacher.name %> | <%= study_session.grade %></h3>
-    <p><%= link_to study_session.content, "", class: "content", data: {id: study_session.id} %> |
+    <p><%= study_session.content %> |
     <%= study_session.date.strftime("%A, %b %d, %Y") %> at <%= study_session.time %></p>
+    <div class="attendees"></div>
   </div>
   <div class="col">
     <!-- <form data-id="<%= study_session.id %>">

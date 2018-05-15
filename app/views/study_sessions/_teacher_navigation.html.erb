@@ -1,5 +1,8 @@
 <div class="row" >
   <!-- <%= button_to "Edit Study Session", edit_study_session_path(study_session), :method => 'get', class: 'btn btn-xs' %> -->
+  <%= button_to "Show Attendees", "#", :data => { id: study_session.id}, form_class: "show-attendees", class: 'btn btn-info btn-xs' %>
+</div><div class="row" >
+  <!-- <%= button_to "Edit Study Session", edit_study_session_path(study_session), :method => 'get', class: 'btn btn-xs' %> -->
   <%= button_to "Edit Study Session", "#", form_class: 'teacher', class: 'btn btn-xs', :id => study_session.id  %>
 </div>
 <div class="row">
