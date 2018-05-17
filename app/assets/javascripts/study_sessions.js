@@ -49,7 +49,7 @@ function submitForm() {
 
     row.append("<div class='col'></div>")
     row.children(".col").append(`<h3> ${resp["subject"]} | ${resp["teacher"]["name"]} | ${resp["grade"]}</h3>`)
-    row.children(".col").append(`<p><a href=/study_sessions/${resp["id"]}>` + resp["content"] + "</a> | " + date.toDateString() + " at " + resp["time"] + "</p>")
+    row.children(".col").append(`<p>${resp["content"]} | ${date.toDateString()} at ${resp["time"]} </p>`)
     row.append("<div class='col'></div>")
     row.children(".col").eq(1).append(`<p><button id="${resp['id']}" class="teacher-js-edit btn btn-xs">Edit Study Session</button></p>`)
     row.children(".col").eq(1).append(`<p><button data-id="${resp['id']}" class="teacher-js-destroy btn btn-danger btn-xs">Delete Study Session</button></p>`)
