@@ -22,7 +22,8 @@ $(document).ready(function () {
 })
 
 function showForm() {
-  $.get("/study_sessions/new").done(function(resp) {
+  $.get("/study_sessions/new.js").done(function(resp) {
+    debugger
      $("#study_session_form").append(resp)
      $("#study_session_form").append('<button id="remove_study_session_form" class="btn btn-danger btn-xs">Cancel</button>')
      $("#remove_study_session_form").on("click", function(e){
@@ -68,8 +69,12 @@ function submitForm() {
 }
 
 function showEditForm(e, id) {
-  $.get("/study_sessions/" + id + "/edit").done(function(resp) {
-
+  // $.get("/study_sessions/" + id + "/edit.js")
+  $.ajax({
+    type: "GET",
+    url: "/study_sessions/" + id + "/edit.js"
+  }).done(function(resp) {
+    debugger
     $(e.currentTarget).parent().parent().append(resp)
 
     $(`#${id}`).parent().hide()

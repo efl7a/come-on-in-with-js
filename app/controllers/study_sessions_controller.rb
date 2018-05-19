@@ -16,7 +16,11 @@ class StudySessionsController < ApplicationController
   def new
     @study_session = StudySession.new
     authorize @study_session
-    render layout: false
+    # render layout: false
+    respond_to do |format|
+      format.html
+      format.js { render layout: false}
+    end
   end
 
   def create
@@ -33,12 +37,12 @@ class StudySessionsController < ApplicationController
 
   def edit
     authorize @study_session
-    # respond_to do |format|
-    #   format.html
-    #   format.js
-    # end
+    respond_to do |format|
+      format.html
+      format.js { render layout: false}
+    end
     # render json: @study_session, status:201
-    render layout: false
+    # render layout: false
   end
 
   def update
